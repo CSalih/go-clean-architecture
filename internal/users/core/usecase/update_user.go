@@ -15,7 +15,7 @@ type updateUserInteractor struct {
 }
 
 func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserInteractor {
-	return updateUserInteractor{
+	return &updateUserInteractor{
 		gateway: gateway,
 	}
 }

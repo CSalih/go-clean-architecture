@@ -15,7 +15,7 @@ type getAllUsersInteractor struct {
 }
 
 func NewGetAllUsersInteractor(gateway GetAllUsersGateway) GetAllUsersInteractor {
-	return getAllUsersInteractor{
+	return &getAllUsersInteractor{
 		gateway: gateway,
 	}
 }

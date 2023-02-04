@@ -10,7 +10,7 @@ type userRepository struct {
 }
 
 func NewInMemoryUserRepository() UserRepository {
-	return userRepository{
+	return &userRepository{
 		data: make(map[string]model.User),
 	}
 }

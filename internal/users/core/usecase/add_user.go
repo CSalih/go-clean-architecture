@@ -17,7 +17,7 @@ type addUserInteractor struct {
 }
 
 func NewAddUserInteractor(gateway SaveUserGateway) AddUserInteractor {
-	return addUserInteractor{
+	return &addUserInteractor{
 		gateway: gateway,
 	}
 }

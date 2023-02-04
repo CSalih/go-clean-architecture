@@ -15,7 +15,7 @@ type getUserByUsernameInteractor struct {
 }
 
 func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByUsernameInteractor {
-	return getUserByUsernameInteractor{
+	return &getUserByUsernameInteractor{
 		gateway: gateway,
 	}
 }
