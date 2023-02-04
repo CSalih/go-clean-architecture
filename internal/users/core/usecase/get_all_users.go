@@ -6,17 +6,21 @@ type GetAllUsersGateway interface {
 	GetAll(GetAllUsersQuery) ([]model.User, error)
 }
 
-type GetAllUsersInteractor struct {
+type GetAllUsersInteractor interface {
+	Handle(GetAllUsersQuery) ([]model.User, error)
+}
+
+type getAllUsersInteractor struct {
 	gateway GetAllUsersGateway
 }
 
 func NewGetAllUsersInteractor(gateway GetAllUsersGateway) GetAllUsersInteractor {
-	return GetAllUsersInteractor{
+	return getAllUsersInteractor{
 		gateway: gateway,
 	}
 }
 
-func (r *GetAllUsersInteractor) Handle(query GetAllUsersQuery) ([]model.User, error) {
+func (r getAllUsersInteractor) Handle(query GetAllUsersQuery) ([]model.User, error) {
 	users, err := r.gateway.GetAll(query)
 	if err != nil {
 		// TODO: We need to pass a presenter

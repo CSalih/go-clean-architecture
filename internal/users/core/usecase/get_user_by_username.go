@@ -6,17 +6,21 @@ type GetUserByUsernameGateway interface {
 	GetByUsername(GetUserByUsernameQuery) (model.User, error)
 }
 
-type GetUserByUsernameInteractor struct {
+type GetUserByUsernameInteractor interface {
+	Handle(GetUserByUsernameQuery) (model.User, error)
+}
+
+type getUserByUsernameInteractor struct {
 	gateway GetUserByUsernameGateway
 }
 
 func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByUsernameInteractor {
-	return GetUserByUsernameInteractor{
+	return getUserByUsernameInteractor{
 		gateway: gateway,
 	}
 }
 
-func (i *GetUserByUsernameInteractor) Handle(query GetUserByUsernameQuery) (model.User, error) {
+func (i getUserByUsernameInteractor) Handle(query GetUserByUsernameQuery) (model.User, error) {
 	user, err := i.gateway.GetByUsername(query)
 	if err != nil {
 		// TODO: We need to pass a presenter

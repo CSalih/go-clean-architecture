@@ -6,17 +6,21 @@ type UpdateUserGateway interface {
 	Update(UpdateUserCommand) (model.User, error)
 }
 
-type UpdateUserInteractor struct {
+type UpdateUserInteractor interface {
+	Handle(UpdateUserCommand) (model.User, error)
+}
+
+type updateUserInteractor struct {
 	gateway UpdateUserGateway
 }
 
 func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserInteractor {
-	return UpdateUserInteractor{
+	return updateUserInteractor{
 		gateway: gateway,
 	}
 }
 
-func (r UpdateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
+func (r updateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
 	// TODO: Add validation here
 
 	// TODO: check if user already exists

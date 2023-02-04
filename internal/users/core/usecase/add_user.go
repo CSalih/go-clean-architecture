@@ -8,17 +8,21 @@ type SaveUserGateway interface {
 	AddNewUser(AddUserCommand) (model.User, error)
 }
 
-type AddUserInteractor struct {
+type AddUserInteractor interface {
+	Handle(AddUserCommand) (model.User, error)
+}
+
+type addUserInteractor struct {
 	gateway SaveUserGateway
 }
 
 func NewAddUserInteractor(gateway SaveUserGateway) AddUserInteractor {
-	return AddUserInteractor{
+	return addUserInteractor{
 		gateway: gateway,
 	}
 }
 
-func (r AddUserInteractor) Handle(command AddUserCommand) (model.User, error) {
+func (r addUserInteractor) Handle(command AddUserCommand) (model.User, error) {
 	// TODO: Add validation here
 
 	// TODO: check if user already exists
