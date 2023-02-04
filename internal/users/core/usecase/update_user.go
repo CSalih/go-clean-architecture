@@ -10,25 +10,7 @@ type UpdateUserInteractor interface {
 	Handle(UpdateUserCommand) (model.User, error)
 }
 
-type updateUserInteractor struct {
-	gateway UpdateUserGateway
-}
-
-func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserInteractor {
-	return &updateUserInteractor{
-		gateway: gateway,
-	}
-}
-
-func (r updateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
-	// TODO: Add validation here
-
-	// TODO: check if user already exists
-
-	user, err := r.gateway.Update(command)
-	if err != nil {
-		// TODO: We need to pass a presenter
-		return model.User{}, err
-	}
-	return user, nil
+type UpdateUserCommand struct {
+	Username string
+	Status   string
 }
