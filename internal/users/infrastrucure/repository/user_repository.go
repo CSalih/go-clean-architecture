@@ -5,7 +5,7 @@ import (
 )
 
 type UserRepository interface {
-	usecase.SaveUserGateway
+	usecase.AddNewUserGateway
 	usecase.UpdateUserGateway
 	usecase.GetAllUsersGateway
 	usecase.GetUserByUsernameGateway

@@ -56,7 +56,7 @@ func (r userRepository) GetByUsername(query usecase.GetUserByUsernameQuery) (mod
 	return user, nil
 }
 
-func (r userRepository) Exists(username string) bool {
-	_, exits := r.data[username]
-	return exits
+func (r userRepository) Exist(query usecase.UsernameExistsQuery) (bool, error) {
+	_, exits := r.data[query.Username]
+	return exits, nil
 }
