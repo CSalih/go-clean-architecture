@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
 )
@@ -28,7 +29,7 @@ func (r userRepository) AddNewUser(command usecase.AddUserCommand) (model.User, 
 func (r userRepository) Update(command usecase.UpdateUserCommand) (model.User, error) {
 	_, exits := r.data[command.Username]
 	if !exits {
-		return model.User{}, &UserNotFoundError{}
+		return model.User{}, problem.UserNotFoundProblem{}
 	}
 	user := model.User{
 		Id:       len(r.data) + 1,
@@ -50,7 +51,7 @@ func (r userRepository) GetAll(_ usecase.GetAllUsersQuery) ([]model.User, error)
 func (r userRepository) GetByUsername(query usecase.GetUserByUsernameQuery) (model.User, error) {
 	user, exits := r.data[query.Username]
 	if !exits {
-		return model.User{}, &UserNotFoundError{}
+		return model.User{}, problem.UserNotFoundProblem{}
 	}
 	return user, nil
 }
