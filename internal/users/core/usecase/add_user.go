@@ -25,8 +25,6 @@ func NewAddUserInteractor(gateway AddNewUserGateway) AddUserInteractor {
 }
 
 func (r addUserInteractor) Handle(command AddUserCommand) (model.User, error) {
-	// TODO: Add validation here
-
 	if exist, _ := r.gateway.Exist(UsernameExistsQuery{command.Username}); exist {
 		return model.User{}, problem.UserExistsProblem{}
 	}
