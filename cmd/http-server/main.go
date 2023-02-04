@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/controller"
 	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/repository"
 	"github.com/CSalih/go-clean-architecture/pkg/router"
@@ -8,9 +9,13 @@ import (
 )
 
 var (
-	userRepository = repository.NewInMemoryUserRepository()
-	userController = controller.NewUserController(userRepository)
-	r              = router.NewGinRouter()
+	userRepository              = repository.NewInMemoryUserRepository()
+	addUserInteractor           = usecase.NewAddUserInteractor(userRepository)
+	getAllUsersInteractor       = usecase.NewGetAllUsersInteractor(userRepository)
+	getUserByUsernameInteractor = usecase.NewGetUserByUsernameInteractor(userRepository)
+	updateUserInteractor        = usecase.NewUpdateUserInteractor(userRepository)
+	userController              = controller.NewUserController(addUserInteractor, getAllUsersInteractor, getUserByUsernameInteractor, updateUserInteractor)
+	r                           = router.NewGinRouter()
 )
 
 func init() {
