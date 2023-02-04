@@ -1,11 +1,12 @@
 package repository
 
-import "github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
+)
 
 type UserRepository interface {
-	Save(User model.User) (model.User, error)
-	Exists(Username string) bool
-	FindAll() ([]model.User, error)
-	FindByUsername(Username string) (model.User, error)
-	Update(User model.User) (model.User, error)
+	usecase.SaveUserGateway
+	usecase.UpdateUserGateway
+	usecase.GetAllUsersGateway
+	usecase.GetUserByUsernameGateway
 }
