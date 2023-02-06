@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/CSalih/go-clean-architecture/internal/router"
+	router2 "github.com/CSalih/go-clean-architecture/internal/common/router"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/repository"
 	"github.com/stretchr/testify/suite"
@@ -16,7 +16,7 @@ var (
 	getUserByUsernameUseCase usecase.GetUserByUsernameUseCase
 	updateUserUseCase        usecase.UpdateUserUseCase
 	controller               UserController
-	testRouter               router.Router
+	testRouter               router2.Router
 )
 
 type ControllerIntegrationTestSuite struct {
@@ -39,7 +39,7 @@ func setupController() {
 	getUserByUsernameUseCase = usecase.NewGetUserByUsernameInteractor(userRepository)
 	updateUserUseCase = usecase.NewUpdateUserInteractor(userRepository, userRepository)
 	controller = NewUserController(addUserUseCase, getAllUsersUseCase, getUserByUsernameUseCase, updateUserUseCase)
-	testRouter = router.NewChiRouter()
+	testRouter = router2.NewChiRouter()
 
 	controller.AddRoutes(testRouter)
 }

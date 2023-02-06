@@ -2,7 +2,7 @@ package controller
 
 import (
 	"fmt"
-	"github.com/CSalih/go-clean-architecture/internal/router"
+	"github.com/CSalih/go-clean-architecture/internal/common/router"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"net/http"
 	"net/http/httptest"
