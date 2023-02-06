@@ -19,7 +19,7 @@ func NewAddUserInteractor(addNewUserGateway AddNewUserGateway, doesUsernameExist
 
 func (r addUserInteractor) Handle(command AddUserCommand) (model.User, error) {
 	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); exist {
-		return model.User{}, problem.UserExistsProblem{}
+		return model.User{}, problem.NewUserExistsProblem()
 	}
 
 	user, err := r.addNewUserGateway.AddNewUser(command)

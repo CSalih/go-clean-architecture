@@ -19,14 +19,14 @@ func NewUpdateUserInteractor(updateUserGateway UpdateUserGateway, doesUsernameEx
 
 func (r updateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
 	if command.Username == "" {
-		return model.User{}, problem.UsernameRequiredProblem{}
+		return model.User{}, problem.NewUsernameRequiredProblem()
 	}
 	if command.Status == "" {
-		return model.User{}, problem.UserStatusRequiredProblem{}
+		return model.User{}, problem.NewUserStatusRequiredProblem()
 	}
 
 	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); !exist {
-		return model.User{}, problem.UserNotFoundProblem{}
+		return model.User{}, problem.NewUserNotFoundProblem()
 	}
 
 	user, err := r.updateUserGateway.Update(command)

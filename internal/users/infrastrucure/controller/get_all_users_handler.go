@@ -13,7 +13,8 @@ type getAllUsersHandler struct {
 func (h getAllUsersHandler) Handle(ctx *router.Context) {
 	user, err := h.getAllUsersUseCase.Handle(usecase.GetAllUsersQuery{})
 	if err != nil {
-		panic(err)
+		_ = ctx.ProblemJson(err)
+		return
 	}
 
 	_ = ctx.Json(http.StatusOK, user)

@@ -30,7 +30,8 @@ func (h updateUserHandler) Handle(ctx *router.Context) {
 		Status:   jsonBody.Status,
 	})
 	if err != nil {
-		panic(err)
+		_ = ctx.ProblemJson(err)
+		return
 	}
 
 	_ = ctx.Json(http.StatusOK, user)

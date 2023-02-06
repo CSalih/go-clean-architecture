@@ -15,7 +15,8 @@ func (h getUserByUsernameHandler) Handle(ctx *router.Context) {
 		Username: ctx.Params["name"],
 	})
 	if err != nil {
-		panic(err)
+		_ = ctx.ProblemJson(err)
+		return
 	}
 
 	_ = ctx.Json(http.StatusOK, user)

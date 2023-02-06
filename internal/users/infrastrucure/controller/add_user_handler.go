@@ -16,7 +16,8 @@ func (h addUserHandler) Handle(ctx *router.Context) {
 		Status:   "new",
 	})
 	if err != nil {
-		panic(err)
+		_ = ctx.ProblemJson(err)
+		return
 	}
 
 	_ = ctx.Json(http.StatusCreated, user)
