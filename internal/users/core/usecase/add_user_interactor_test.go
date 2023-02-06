@@ -8,7 +8,8 @@ import (
 
 func Test_addUserInteractor_Handle(t *testing.T) {
 	type fields struct {
-		gateway AddNewUserGateway
+		addNewUserGateway         AddNewUserGateway
+		doesUsernameExistsGateway DoesUsernameExistsGateway
 	}
 	type args struct {
 		command AddUserCommand
@@ -23,10 +24,12 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 		{
 			name: "should create a user when username not exists",
 			fields: fields{
-				gateway: mockAddNewUserGateway{
+				addNewUserGateway: mockAddNewUserGateway{
 					Username: "tester",
 					Status:   "NEW",
-					Exists:   false,
+				},
+				doesUsernameExistsGateway: mockDoesUsernameExistsGateway{
+					Exists: false,
 				},
 			},
 			args: args{
@@ -43,10 +46,12 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 		{
 			name: "should not create a user when username already exists",
 			fields: fields{
-				gateway: mockAddNewUserGateway{
+				addNewUserGateway: mockAddNewUserGateway{
 					Username: "tester",
 					Status:   "NEW",
-					Exists:   true,
+				},
+				doesUsernameExistsGateway: mockDoesUsernameExistsGateway{
+					Exists: true,
 				},
 			},
 			args: args{
@@ -61,7 +66,8 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			r := addUserInteractor{
-				gateway: tt.fields.gateway,
+				addNewUserGateway:         tt.fields.addNewUserGateway,
+				doesUsernameExistsGateway: tt.fields.doesUsernameExistsGateway,
 			}
 			got, err := r.Handle(tt.args.command)
 			if (err != nil) != tt.wantErr {
@@ -78,7 +84,10 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 type mockAddNewUserGateway struct {
 	Username string
 	Status   string
-	Exists   bool
+}
+
+type mockDoesUsernameExistsGateway struct {
+	Exists bool
 }
 
 func (r mockAddNewUserGateway) AddNewUser(_ AddUserCommand) (model.User, error) {
@@ -88,6 +97,6 @@ func (r mockAddNewUserGateway) AddNewUser(_ AddUserCommand) (model.User, error) 
 	}, nil
 }
 
-func (r mockAddNewUserGateway) Exist(_ UsernameExistsQuery) (bool, error) {
+func (r mockDoesUsernameExistsGateway) Exist(_ UsernameExistsQuery) (bool, error) {
 	return r.Exists, nil
 }

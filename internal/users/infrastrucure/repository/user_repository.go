@@ -6,6 +6,7 @@ import (
 
 type UserRepository interface {
 	usecase.AddNewUserGateway
+	usecase.DoesUsernameExistsGateway
 	usecase.UpdateUserGateway
 	usecase.GetAllUsersGateway
 	usecase.GetUserByUsernameGateway

@@ -10,7 +10,7 @@ import (
 
 var (
 	userRepository              = repository.NewInMemoryUserRepository()
-	addUserInteractor           = usecase.NewAddUserInteractor(userRepository)
+	addUserInteractor           = usecase.NewAddUserInteractor(userRepository, userRepository)
 	getAllUsersInteractor       = usecase.NewGetAllUsersInteractor(userRepository)
 	getUserByUsernameInteractor = usecase.NewGetUserByUsernameInteractor(userRepository)
 	updateUserInteractor        = usecase.NewUpdateUserInteractor(userRepository)

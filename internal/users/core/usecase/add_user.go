@@ -6,6 +6,9 @@ import (
 
 type AddNewUserGateway interface {
 	AddNewUser(AddUserCommand) (model.User, error)
+}
+
+type DoesUsernameExistsGateway interface {
 	Exist(UsernameExistsQuery) (bool, error)
 }
 

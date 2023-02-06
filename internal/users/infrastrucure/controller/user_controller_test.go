@@ -34,7 +34,7 @@ func TestControllerIntegrationTestSuite(t *testing.T) {
 func setupController() {
 	log.Println("Setting up controller")
 	userRepository = repository.NewInMemoryUserRepository()
-	addUserUseCase = usecase.NewAddUserInteractor(userRepository)
+	addUserUseCase = usecase.NewAddUserInteractor(userRepository, userRepository)
 	getAllUsersUseCase = usecase.NewGetAllUsersInteractor(userRepository)
 	getUserByUsernameUseCase = usecase.NewGetUserByUsernameInteractor(userRepository)
 	updateUserUseCase = usecase.NewUpdateUserInteractor(userRepository)

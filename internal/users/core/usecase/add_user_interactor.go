@@ -6,21 +6,23 @@ import (
 )
 
 type addUserInteractor struct {
-	gateway AddNewUserGateway
+	addNewUserGateway         AddNewUserGateway
+	doesUsernameExistsGateway DoesUsernameExistsGateway
 }
 
-func NewAddUserInteractor(gateway AddNewUserGateway) AddUserUseCase {
+func NewAddUserInteractor(addNewUserGateway AddNewUserGateway, doesUsernameExistsGateway DoesUsernameExistsGateway) AddUserUseCase {
 	return &addUserInteractor{
-		gateway: gateway,
+		addNewUserGateway:         addNewUserGateway,
+		doesUsernameExistsGateway: doesUsernameExistsGateway,
 	}
 }
 
 func (r addUserInteractor) Handle(command AddUserCommand) (model.User, error) {
-	if exist, _ := r.gateway.Exist(UsernameExistsQuery{command.Username}); exist {
+	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); exist {
 		return model.User{}, problem.UserExistsProblem{}
 	}
 
-	user, err := r.gateway.AddNewUser(command)
+	user, err := r.addNewUserGateway.AddNewUser(command)
 	if err != nil {
 		// TODO: We need to pass a presenter
 		return model.User{}, err
