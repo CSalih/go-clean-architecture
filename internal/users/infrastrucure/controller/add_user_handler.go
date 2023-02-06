@@ -7,11 +7,11 @@ import (
 )
 
 type AddUserHandler struct {
-	interactor usecase.AddUserInteractor
+	addUserUseCase usecase.AddUserUseCase
 }
 
 func (h AddUserHandler) Handle(ctx *router.Context) {
-	user, err := h.interactor.Handle(usecase.AddUserCommand{
+	user, err := h.addUserUseCase.Handle(usecase.AddUserCommand{
 		Username: ctx.Params["name"],
 		Status:   "new",
 	})

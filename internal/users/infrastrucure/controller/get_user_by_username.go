@@ -7,11 +7,11 @@ import (
 )
 
 type GetUserByUsernameHandler struct {
-	interactor usecase.GetUserByUsernameInteractor
+	getUserByUsernameUseCase usecase.GetUserByUsernameUseCase
 }
 
 func (h GetUserByUsernameHandler) Handle(ctx *router.Context) {
-	user, err := h.interactor.Handle(usecase.GetUserByUsernameQuery{
+	user, err := h.getUserByUsernameUseCase.Handle(usecase.GetUserByUsernameQuery{
 		Username: ctx.Params["name"],
 	})
 	if err != nil {

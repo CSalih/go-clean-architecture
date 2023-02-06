@@ -9,7 +9,7 @@ type AddNewUserGateway interface {
 	Exist(UsernameExistsQuery) (bool, error)
 }
 
-type AddUserInteractor interface {
+type AddUserUseCase interface {
 	Handle(AddUserCommand) (model.User, error)
 }
 

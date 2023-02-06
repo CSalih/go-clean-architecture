@@ -6,7 +6,7 @@ type GetUserByUsernameGateway interface {
 	GetByUsername(GetUserByUsernameQuery) (model.User, error)
 }
 
-type GetUserByUsernameInteractor interface {
+type GetUserByUsernameUseCase interface {
 	Handle(GetUserByUsernameQuery) (model.User, error)
 }
 

@@ -6,7 +6,7 @@ type UpdateUserGateway interface {
 	Update(UpdateUserCommand) (model.User, error)
 }
 
-type UpdateUserInteractor interface {
+type UpdateUserUseCase interface {
 	Handle(UpdateUserCommand) (model.User, error)
 }
 

@@ -11,7 +11,7 @@ func (suite *ControllerIntegrationTestSuite) TestAddUserHandler_Handle() {
 	req, _ := http.NewRequest("POST", "/api/v1/users/salih", nil)
 
 	addUserHandler := AddUserHandler{
-		interactor: addUserInteractor,
+		addUserUseCase: addUserUseCase,
 	}
 
 	addUserHandler.Handle(&router.Context{

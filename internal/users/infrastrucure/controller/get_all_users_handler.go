@@ -7,11 +7,11 @@ import (
 )
 
 type GetAllUsersHandler struct {
-	interactor usecase.GetAllUsersInteractor
+	getAllUsersUseCase usecase.GetAllUsersUseCase
 }
 
 func (h GetAllUsersHandler) Handle(ctx *router.Context) {
-	user, err := h.interactor.Handle(usecase.GetAllUsersQuery{})
+	user, err := h.getAllUsersUseCase.Handle(usecase.GetAllUsersQuery{})
 	if err != nil {
 		panic(err)
 	}

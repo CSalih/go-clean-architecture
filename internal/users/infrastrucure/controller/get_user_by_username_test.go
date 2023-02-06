@@ -17,7 +17,7 @@ func (suite *ControllerIntegrationTestSuite) TestGetUserByUsernameHandler_Handle
 	req, _ := http.NewRequest("GET", "/api/v1/users/salih", nil)
 
 	handler := GetUserByUsernameHandler{
-		interactor: getUserByUsernameInteractor,
+		getUserByUsernameUseCase: getUserByUsernameUseCase,
 	}
 
 	handler.Handle(&router.Context{

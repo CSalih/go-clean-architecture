@@ -18,23 +18,23 @@ type UserController interface {
 }
 
 func NewUserController(
-	addUserInteractor usecase.AddUserInteractor,
-	getAllUsersInteractor usecase.GetAllUsersInteractor,
-	getUserByUsernameInteractor usecase.GetUserByUsernameInteractor,
-	updateUserInteractor usecase.UpdateUserInteractor,
+	addUserUseCase usecase.AddUserUseCase,
+	getAllUsersUseCase usecase.GetAllUsersUseCase,
+	getUserByUsernameUseCase usecase.GetUserByUsernameUseCase,
+	updateUserUseCase usecase.UpdateUserUseCase,
 ) UserController {
 	return &userController{
 		addUserHandler: AddUserHandler{
-			interactor: addUserInteractor,
+			addUserUseCase: addUserUseCase,
 		},
 		getAllUsersHandler: GetAllUsersHandler{
-			interactor: getAllUsersInteractor,
+			getAllUsersUseCase: getAllUsersUseCase,
 		},
 		getUserByUsernameHandler: GetUserByUsernameHandler{
-			interactor: getUserByUsernameInteractor,
+			getUserByUsernameUseCase: getUserByUsernameUseCase,
 		},
 		updateUserHandler: UpdateUserHandler{
-			interactor: updateUserInteractor,
+			updateUserUseCase: updateUserUseCase,
 		},
 	}
 }

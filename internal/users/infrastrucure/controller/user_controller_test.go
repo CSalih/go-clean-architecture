@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	userRepository              repository.UserRepository
-	addUserInteractor           usecase.AddUserInteractor
-	getAllUsersInteractor       usecase.GetAllUsersInteractor
-	getUserByUsernameInteractor usecase.GetUserByUsernameInteractor
-	updateUserInteractor        usecase.UpdateUserInteractor
-	controller                  UserController
-	testRouter                  router.Router
+	userRepository           repository.UserRepository
+	addUserUseCase           usecase.AddUserUseCase
+	getAllUsersUseCase       usecase.GetAllUsersUseCase
+	getUserByUsernameUseCase usecase.GetUserByUsernameUseCase
+	updateUserUseCase        usecase.UpdateUserUseCase
+	controller               UserController
+	testRouter               router.Router
 )
 
 type ControllerIntegrationTestSuite struct {
@@ -34,11 +34,11 @@ func TestControllerIntegrationTestSuite(t *testing.T) {
 func setupController() {
 	log.Println("Setting up controller")
 	userRepository = repository.NewInMemoryUserRepository()
-	addUserInteractor = usecase.NewAddUserInteractor(userRepository)
-	getAllUsersInteractor = usecase.NewGetAllUsersInteractor(userRepository)
-	getUserByUsernameInteractor = usecase.NewGetUserByUsernameInteractor(userRepository)
-	updateUserInteractor = usecase.NewUpdateUserInteractor(userRepository)
-	controller = NewUserController(addUserInteractor, getAllUsersInteractor, getUserByUsernameInteractor, updateUserInteractor)
+	addUserUseCase = usecase.NewAddUserInteractor(userRepository)
+	getAllUsersUseCase = usecase.NewGetAllUsersInteractor(userRepository)
+	getUserByUsernameUseCase = usecase.NewGetUserByUsernameInteractor(userRepository)
+	updateUserUseCase = usecase.NewUpdateUserInteractor(userRepository)
+	controller = NewUserController(addUserUseCase, getAllUsersUseCase, getUserByUsernameUseCase, updateUserUseCase)
 	testRouter = router.NewChiRouter()
 
 	controller.AddRoutes(testRouter)

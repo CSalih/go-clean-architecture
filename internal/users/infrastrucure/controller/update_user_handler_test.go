@@ -22,7 +22,7 @@ func (suite *ControllerIntegrationTestSuite) TestUpdateUserHandler_Handle() {
 	req, _ := http.NewRequest("PUT", "/api/v1/users/salih", strings.NewReader(payload))
 
 	handler := UpdateUserHandler{
-		interactor: updateUserInteractor,
+		updateUserUseCase: updateUserUseCase,
 	}
 
 	handler.Handle(&router.Context{

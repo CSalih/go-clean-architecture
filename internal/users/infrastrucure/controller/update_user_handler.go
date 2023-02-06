@@ -8,7 +8,7 @@ import (
 )
 
 type UpdateUserHandler struct {
-	interactor usecase.UpdateUserInteractor
+	updateUserUseCase usecase.UpdateUserUseCase
 }
 
 func (h UpdateUserHandler) Handle(ctx *router.Context) {
@@ -25,7 +25,7 @@ func (h UpdateUserHandler) Handle(ctx *router.Context) {
 		return
 	}
 
-	user, err := h.interactor.Handle(usecase.UpdateUserCommand{
+	user, err := h.updateUserUseCase.Handle(usecase.UpdateUserCommand{
 		Username: ctx.Params["name"],
 		Status:   jsonBody.Status,
 	})

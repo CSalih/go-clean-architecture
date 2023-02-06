@@ -6,7 +6,7 @@ type GetAllUsersGateway interface {
 	GetAll(GetAllUsersQuery) ([]model.User, error)
 }
 
-type GetAllUsersInteractor interface {
+type GetAllUsersUseCase interface {
 	Handle(GetAllUsersQuery) ([]model.User, error)
 }
 

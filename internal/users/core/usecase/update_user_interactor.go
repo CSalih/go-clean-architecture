@@ -6,7 +6,7 @@ type updateUserInteractor struct {
 	gateway UpdateUserGateway
 }
 
-func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserInteractor {
+func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserUseCase {
 	return &updateUserInteractor{
 		gateway: gateway,
 	}

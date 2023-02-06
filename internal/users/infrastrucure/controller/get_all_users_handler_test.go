@@ -13,7 +13,7 @@ func (suite *ControllerIntegrationTestSuite) TestGetAllUsersHandler_Handle() {
 	w := httptest.NewRecorder()
 
 	handler := GetAllUsersHandler{
-		interactor: getAllUsersInteractor,
+		getAllUsersUseCase: getAllUsersUseCase,
 	}
 
 	handler.Handle(&router.Context{

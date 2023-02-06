@@ -6,7 +6,7 @@ type getUserByUsernameInteractor struct {
 	gateway GetUserByUsernameGateway
 }
 
-func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByUsernameInteractor {
+func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByUsernameUseCase {
 	return &getUserByUsernameInteractor{
 		gateway: gateway,
 	}

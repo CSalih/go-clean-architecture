@@ -9,7 +9,7 @@ type addUserInteractor struct {
 	gateway AddNewUserGateway
 }
 
-func NewAddUserInteractor(gateway AddNewUserGateway) AddUserInteractor {
+func NewAddUserInteractor(gateway AddNewUserGateway) AddUserUseCase {
 	return &addUserInteractor{
 		gateway: gateway,
 	}
