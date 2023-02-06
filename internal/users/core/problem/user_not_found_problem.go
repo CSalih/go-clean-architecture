@@ -1,16 +1,16 @@
 package problem
 
 type UserNotFoundProblem struct {
-	Type   string `json:"type"`
-	Status int    `json:"status"`
-	Title  string `json:"title"`
+	Problem
 }
 
 func (p UserNotFoundProblem) NewUserNotFoundProblem() *UserNotFoundProblem {
 	return &UserNotFoundProblem{
-		Type:   "https://example.com/problems/user-not-found",
-		Title:  "User not found",
-		Status: 404,
+		Problem{
+			Type:   "https://example.com/problems/user-not-found",
+			Title:  "User not found",
+			Status: 404,
+		},
 	}
 }
 

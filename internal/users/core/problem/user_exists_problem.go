@@ -1,16 +1,16 @@
 package problem
 
 type UserExistsProblem struct {
-	Type   string `json:"type"`
-	Status int    `json:"status"`
-	Title  string `json:"title"`
+	Problem
 }
 
 func (p UserExistsProblem) NewUserExistsProblem() *UserExistsProblem {
 	return &UserExistsProblem{
-		Type:   "https://example.com/problems/user-not-found",
-		Title:  "Username already exist",
-		Status: 400,
+		Problem{
+			Type:   "https://example.com/problems/user-exists",
+			Title:  "Username already exist",
+			Status: 400,
+		},
 	}
 }
 
