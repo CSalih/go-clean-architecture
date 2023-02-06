@@ -10,7 +10,7 @@ func (suite *ControllerIntegrationTestSuite) TestAddUserHandler_Handle() {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("POST", "/api/v1/users/salih", nil)
 
-	addUserHandler := AddUserHandler{
+	addUserHandler := addUserHandler{
 		addUserUseCase: addUserUseCase,
 	}
 

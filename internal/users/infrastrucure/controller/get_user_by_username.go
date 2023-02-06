@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type GetUserByUsernameHandler struct {
+type getUserByUsernameHandler struct {
 	getUserByUsernameUseCase usecase.GetUserByUsernameUseCase
 }
 
-func (h GetUserByUsernameHandler) Handle(ctx *router.Context) {
+func (h getUserByUsernameHandler) Handle(ctx *router.Context) {
 	user, err := h.getUserByUsernameUseCase.Handle(usecase.GetUserByUsernameQuery{
 		Username: ctx.Params["name"],
 	})

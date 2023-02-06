@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type GetAllUsersHandler struct {
+type getAllUsersHandler struct {
 	getAllUsersUseCase usecase.GetAllUsersUseCase
 }
 
-func (h GetAllUsersHandler) Handle(ctx *router.Context) {
+func (h getAllUsersHandler) Handle(ctx *router.Context) {
 	user, err := h.getAllUsersUseCase.Handle(usecase.GetAllUsersQuery{})
 	if err != nil {
 		panic(err)

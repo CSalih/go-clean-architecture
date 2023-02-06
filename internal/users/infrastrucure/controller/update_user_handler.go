@@ -7,11 +7,11 @@ import (
 	"net/http"
 )
 
-type UpdateUserHandler struct {
+type updateUserHandler struct {
 	updateUserUseCase usecase.UpdateUserUseCase
 }
 
-func (h UpdateUserHandler) Handle(ctx *router.Context) {
+func (h updateUserHandler) Handle(ctx *router.Context) {
 	var jsonBody struct {
 		Status string `jsonBody:"status" binding:"required"`
 	}

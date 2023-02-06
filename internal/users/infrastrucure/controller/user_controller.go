@@ -6,10 +6,10 @@ import (
 )
 
 type userController struct {
-	addUserHandler           AddUserHandler
-	getAllUsersHandler       GetAllUsersHandler
-	getUserByUsernameHandler GetUserByUsernameHandler
-	updateUserHandler        UpdateUserHandler
+	addUserHandler           addUserHandler
+	getAllUsersHandler       getAllUsersHandler
+	getUserByUsernameHandler getUserByUsernameHandler
+	updateUserHandler        updateUserHandler
 }
 
 type UserController interface {
@@ -24,16 +24,16 @@ func NewUserController(
 	updateUserUseCase usecase.UpdateUserUseCase,
 ) UserController {
 	return &userController{
-		addUserHandler: AddUserHandler{
+		addUserHandler: addUserHandler{
 			addUserUseCase: addUserUseCase,
 		},
-		getAllUsersHandler: GetAllUsersHandler{
+		getAllUsersHandler: getAllUsersHandler{
 			getAllUsersUseCase: getAllUsersUseCase,
 		},
-		getUserByUsernameHandler: GetUserByUsernameHandler{
+		getUserByUsernameHandler: getUserByUsernameHandler{
 			getUserByUsernameUseCase: getUserByUsernameUseCase,
 		},
-		updateUserHandler: UpdateUserHandler{
+		updateUserHandler: updateUserHandler{
 			updateUserUseCase: updateUserUseCase,
 		},
 	}

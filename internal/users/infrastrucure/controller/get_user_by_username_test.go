@@ -16,7 +16,7 @@ func (suite *ControllerIntegrationTestSuite) TestGetUserByUsernameHandler_Handle
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/v1/users/salih", nil)
 
-	handler := GetUserByUsernameHandler{
+	handler := getUserByUsernameHandler{
 		getUserByUsernameUseCase: getUserByUsernameUseCase,
 	}
 

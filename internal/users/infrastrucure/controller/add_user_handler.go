@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type AddUserHandler struct {
+type addUserHandler struct {
 	addUserUseCase usecase.AddUserUseCase
 }
 
-func (h AddUserHandler) Handle(ctx *router.Context) {
+func (h addUserHandler) Handle(ctx *router.Context) {
 	user, err := h.addUserUseCase.Handle(usecase.AddUserCommand{
 		Username: ctx.Params["name"],
 		Status:   "new",

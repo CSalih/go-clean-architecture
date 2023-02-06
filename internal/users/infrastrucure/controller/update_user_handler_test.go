@@ -21,7 +21,7 @@ func (suite *ControllerIntegrationTestSuite) TestUpdateUserHandler_Handle() {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("PUT", "/api/v1/users/salih", strings.NewReader(payload))
 
-	handler := UpdateUserHandler{
+	handler := updateUserHandler{
 		updateUserUseCase: updateUserUseCase,
 	}
 

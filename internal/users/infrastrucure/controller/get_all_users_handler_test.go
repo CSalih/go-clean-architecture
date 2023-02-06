@@ -12,7 +12,7 @@ func (suite *ControllerIntegrationTestSuite) TestGetAllUsersHandler_Handle() {
 	req, _ := http.NewRequest(http.MethodGet, "/api/v1/users", nil)
 	w := httptest.NewRecorder()
 
-	handler := GetAllUsersHandler{
+	handler := getAllUsersHandler{
 		getAllUsersUseCase: getAllUsersUseCase,
 	}
 
