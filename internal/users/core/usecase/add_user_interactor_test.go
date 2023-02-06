@@ -77,7 +77,10 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 				addNewUserGateway:         tt.fields.addNewUserGateway,
 				doesUsernameExistsGateway: tt.fields.doesUsernameExistsGateway,
 			}
-			r.Handle(tt.args.command, tt.args.presenter)
+			err := r.Handle(tt.args.command, tt.args.presenter)
+			if err != nil && tt.wantErr {
+				// TODO: check if message is correct
+			}
 		})
 	}
 }
@@ -108,14 +111,16 @@ type mockPresenter struct {
 	Test    *testing.T
 }
 
-func (p mockPresenter) OnSuccess(result interface{}) {
+func (p mockPresenter) OnSuccess(result interface{}) error {
 	if !reflect.DeepEqual(result, p.Want) {
 		p.Test.Errorf("Handle() got = %v, want %v", result, p.Want)
 	}
+	return nil
 }
-func (p mockPresenter) OnError(err error) {
+func (p mockPresenter) OnError(err error) error {
 	if (err != nil) != p.WantErr {
 		p.Test.Errorf("Handle() error = %v, wantErr %v", err, p.WantErr)
-		return
+		return err
 	}
+	return nil
 }

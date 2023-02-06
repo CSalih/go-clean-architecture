@@ -17,16 +17,14 @@ func NewAddUserInteractor(addNewUserGateway AddNewUserGateway, doesUsernameExist
 	}
 }
 
-func (r addUserInteractor) Handle(command AddUserCommand, presenter presenter.Presenter) {
+func (r addUserInteractor) Handle(command AddUserCommand, presenter presenter.Presenter) error {
 	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); exist {
-		presenter.OnError(problem.NewUserExistsProblem())
-		return
+		return presenter.OnError(problem.NewUserExistsProblem())
 	}
 
 	user, err := r.addNewUserGateway.AddNewUser(command)
 	if err != nil {
-		presenter.OnError(err)
-		return
+		return presenter.OnError(err)
 	}
-	presenter.OnSuccess(user)
+	return presenter.OnSuccess(user)
 }

@@ -14,7 +14,7 @@ type DoesUsernameExistsGateway interface {
 }
 
 type AddUserUseCase interface {
-	Handle(AddUserCommand, presenter.Presenter)
+	Handle(AddUserCommand, presenter.Presenter) error
 }
 
 type AddUserCommand struct {

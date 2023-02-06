@@ -11,11 +11,11 @@ type addUserHandler struct {
 	addUserUseCase usecase.AddUserUseCase
 }
 
-func (h addUserHandler) Handle(ctx *router.Context) {
+func (h addUserHandler) Handle(ctx *router.Context) error {
 	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusCreated)
 	command := usecase.AddUserCommand{
 		Username: ctx.Params["name"],
 		Status:   "new",
 	}
-	h.addUserUseCase.Handle(command, jsonPresenter)
+	return h.addUserUseCase.Handle(command, jsonPresenter)
 }

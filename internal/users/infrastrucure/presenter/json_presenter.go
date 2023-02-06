@@ -18,35 +18,36 @@ func NewJsonHttpPresenter(writer http.ResponseWriter, successStatusCode int) Pre
 	}
 }
 
-func (p *jsonHttpPresenter) OnSuccess(data interface{}) {
+func (p *jsonHttpPresenter) OnSuccess(data interface{}) error {
 	jsonString, err := json.Marshal(data)
 	if err != nil {
-		p.OnError(err)
-		return
+		return p.OnError(err)
+
 	}
 
 	p.Writer.Header().Set("Content-Type", "application/json")
 	p.Writer.WriteHeader(p.SuccessStatusCode)
 	_, err = p.Writer.Write(jsonString)
 	if err != nil {
-		p.OnError(err)
-		return
+		return p.OnError(err)
 	}
+	return nil
 }
 
-func (p *jsonHttpPresenter) OnError(err error) {
+func (p *jsonHttpPresenter) OnError(err error) error {
 	data := ProblemFromError(err)
 	jsonString, err := json.Marshal(data)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	p.Writer.Header().Set("Content-Type", "application/problem+json")
 	p.Writer.WriteHeader(data.Status)
 	_, err = p.Writer.Write(jsonString)
 	if err != nil {
-		panic(err)
+		return err
 	}
+	return nil
 }
 
 func ProblemFromError(err error) problem.Problem {
