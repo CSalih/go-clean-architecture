@@ -1,23 +1,30 @@
 package usecase
 
-import "github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
+	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+)
 
 type updateUserInteractor struct {
-	gateway UpdateUserGateway
+	updateUserGateway         UpdateUserGateway
+	doesUsernameExistsGateway DoesUsernameExistsGateway
 }
 
-func NewUpdateUserInteractor(gateway UpdateUserGateway) UpdateUserUseCase {
+func NewUpdateUserInteractor(updateUserGateway UpdateUserGateway, doesUsernameExistsGateway DoesUsernameExistsGateway) UpdateUserUseCase {
 	return &updateUserInteractor{
-		gateway: gateway,
+		updateUserGateway:         updateUserGateway,
+		doesUsernameExistsGateway: doesUsernameExistsGateway,
 	}
 }
 
 func (r updateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
 	// TODO: Add validation here
 
-	// TODO: check if user already exists
+	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); !exist {
+		return model.User{}, problem.UserNotFoundProblem{}
+	}
 
-	user, err := r.gateway.Update(command)
+	user, err := r.updateUserGateway.Update(command)
 	if err != nil {
 		// TODO: We need to pass a presenter
 		return model.User{}, err

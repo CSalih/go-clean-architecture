@@ -37,7 +37,7 @@ func setupController() {
 	addUserUseCase = usecase.NewAddUserInteractor(userRepository, userRepository)
 	getAllUsersUseCase = usecase.NewGetAllUsersInteractor(userRepository)
 	getUserByUsernameUseCase = usecase.NewGetUserByUsernameInteractor(userRepository)
-	updateUserUseCase = usecase.NewUpdateUserInteractor(userRepository)
+	updateUserUseCase = usecase.NewUpdateUserInteractor(userRepository, userRepository)
 	controller = NewUserController(addUserUseCase, getAllUsersUseCase, getUserByUsernameUseCase, updateUserUseCase)
 	testRouter = router.NewChiRouter()
 

@@ -13,7 +13,7 @@ var (
 	addUserInteractor           = usecase.NewAddUserInteractor(userRepository, userRepository)
 	getAllUsersInteractor       = usecase.NewGetAllUsersInteractor(userRepository)
 	getUserByUsernameInteractor = usecase.NewGetUserByUsernameInteractor(userRepository)
-	updateUserInteractor        = usecase.NewUpdateUserInteractor(userRepository)
+	updateUserInteractor        = usecase.NewUpdateUserInteractor(userRepository, userRepository)
 	userController              = controller.NewUserController(addUserInteractor, getAllUsersInteractor, getUserByUsernameInteractor, updateUserInteractor)
 	r                           = router.NewGinRouter()
 )
