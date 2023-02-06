@@ -1,9 +1,9 @@
 package controller
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/router"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/repository"
-	"github.com/CSalih/go-clean-architecture/pkg/router"
 	"github.com/stretchr/testify/suite"
 	"log"
 	"testing"

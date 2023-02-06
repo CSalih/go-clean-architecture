@@ -43,8 +43,6 @@ func (c *Context) ProblemJson(err error) error {
 	return nil
 }
 
-// TODO: Using Problem Details is a kind of business requirement, so it should be moved to the core package.
-
 func ProblemFromError(err error) problem.Problem {
 	switch prob := err.(type) {
 	case problem.Details:

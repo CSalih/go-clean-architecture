@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/CSalih/go-clean-architecture/pkg/router"
+	"github.com/CSalih/go-clean-architecture/internal/router"
 	"net/http"
 	"net/http/httptest"
 )
