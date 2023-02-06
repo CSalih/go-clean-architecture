@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"github.com/CSalih/go-clean-architecture/internal/common/router"
+	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
 	"net/http"
 )
@@ -18,9 +19,10 @@ func (h updateUserHandler) Handle(ctx *router.Context) {
 
 	err := json.NewDecoder(ctx.Request.Body).Decode(&jsonBody)
 	if err != nil {
-		_ = ctx.Json(http.StatusBadRequest, map[string]interface{}{
-			"detail": err.Error(),
-			"status": http.StatusBadRequest,
+		_ = ctx.ProblemJson(problem.Problem{
+			Type:   "https://example.com/probs/invalid-json",
+			Title:  "Invalid JSON payload received",
+			Status: http.StatusBadRequest,
 		})
 		return
 	}
