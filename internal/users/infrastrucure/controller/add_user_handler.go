@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/CSalih/go-clean-architecture/internal/common/router"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
+	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 	"net/http"
 )
 
@@ -11,14 +12,10 @@ type addUserHandler struct {
 }
 
 func (h addUserHandler) Handle(ctx *router.Context) {
-	user, err := h.addUserUseCase.Handle(usecase.AddUserCommand{
+	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusCreated)
+	command := usecase.AddUserCommand{
 		Username: ctx.Params["name"],
 		Status:   "new",
-	})
-	if err != nil {
-		_ = ctx.ProblemJson(err)
-		return
 	}
-
-	_ = ctx.Json(http.StatusCreated, user)
+	h.addUserUseCase.Handle(command, jsonPresenter)
 }

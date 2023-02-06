@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 )
 
 type AddNewUserGateway interface {
@@ -13,7 +14,7 @@ type DoesUsernameExistsGateway interface {
 }
 
 type AddUserUseCase interface {
-	Handle(AddUserCommand) (model.User, error)
+	Handle(AddUserCommand, presenter.Presenter)
 }
 
 type AddUserCommand struct {

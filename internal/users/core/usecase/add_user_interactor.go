@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
-	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 )
 
 type addUserInteractor struct {
@@ -17,15 +17,16 @@ func NewAddUserInteractor(addNewUserGateway AddNewUserGateway, doesUsernameExist
 	}
 }
 
-func (r addUserInteractor) Handle(command AddUserCommand) (model.User, error) {
+func (r addUserInteractor) Handle(command AddUserCommand, presenter presenter.Presenter) {
 	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); exist {
-		return model.User{}, problem.NewUserExistsProblem()
+		presenter.OnError(problem.NewUserExistsProblem())
+		return
 	}
 
 	user, err := r.addNewUserGateway.AddNewUser(command)
 	if err != nil {
-		// TODO: We need to pass a presenter
-		return model.User{}, err
+		presenter.OnError(err)
+		return
 	}
-	return user, nil
+	presenter.OnSuccess(user)
 }

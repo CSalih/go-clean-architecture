@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 	"reflect"
 	"testing"
 )
@@ -12,7 +13,8 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 		doesUsernameExistsGateway DoesUsernameExistsGateway
 	}
 	type args struct {
-		command AddUserCommand
+		command   AddUserCommand
+		presenter presenter.Presenter
 	}
 	tests := []struct {
 		name    string
@@ -36,12 +38,15 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 				command: AddUserCommand{
 					Username: "tester",
 				},
+				presenter: mockPresenter{
+					Want: model.User{
+						Username: "tester",
+						Status:   "NEW",
+					},
+					Test:    t,
+					WantErr: false,
+				},
 			},
-			want: model.User{
-				Username: "tester",
-				Status:   "NEW",
-			},
-			wantErr: false,
 		},
 		{
 			name: "should not create a user when username already exists",
@@ -58,9 +63,12 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 				command: AddUserCommand{
 					Username: "tester",
 				},
+				presenter: mockPresenter{
+					Want:    model.User{},
+					Test:    t,
+					WantErr: true,
+				},
 			},
-			want:    model.User{},
-			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -69,14 +77,7 @@ func Test_addUserInteractor_Handle(t *testing.T) {
 				addNewUserGateway:         tt.fields.addNewUserGateway,
 				doesUsernameExistsGateway: tt.fields.doesUsernameExistsGateway,
 			}
-			got, err := r.Handle(tt.args.command)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Handle() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Handle() got = %v, want %v", got, tt.want)
-			}
+			r.Handle(tt.args.command, tt.args.presenter)
 		})
 	}
 }
@@ -99,4 +100,22 @@ func (r mockAddNewUserGateway) AddNewUser(_ AddUserCommand) (model.User, error) 
 
 func (r mockDoesUsernameExistsGateway) Exist(_ UsernameExistsQuery) (bool, error) {
 	return r.Exists, nil
+}
+
+type mockPresenter struct {
+	Want    interface{}
+	WantErr bool
+	Test    *testing.T
+}
+
+func (p mockPresenter) OnSuccess(result interface{}) {
+	if !reflect.DeepEqual(result, p.Want) {
+		p.Test.Errorf("Handle() got = %v, want %v", result, p.Want)
+	}
+}
+func (p mockPresenter) OnError(err error) {
+	if (err != nil) != p.WantErr {
+		p.Test.Errorf("Handle() error = %v, wantErr %v", err, p.WantErr)
+		return
+	}
 }
