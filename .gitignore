@@ -2,6 +2,9 @@
 .vscode
 .idea
 
+# Build files
+build
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
