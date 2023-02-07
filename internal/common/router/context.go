@@ -28,7 +28,7 @@ func (c *Context) Json(code int, data interface{}) error {
 }
 
 func (c *Context) ProblemJson(err error) error {
-	data := NewFromError(err)
+	data := newFromError(err)
 	jsonString, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -43,7 +43,7 @@ func (c *Context) ProblemJson(err error) error {
 	return nil
 }
 
-func NewFromError(err error) problem.Problem {
+func newFromError(err error) problem.Problem {
 	switch prob := err.(type) {
 	case problem.Details:
 		return prob.GetProblem()
