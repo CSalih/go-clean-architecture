@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
+	"github.com/CSalih/go-clean-architecture/internal/common/presenter"
 	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
 )
 

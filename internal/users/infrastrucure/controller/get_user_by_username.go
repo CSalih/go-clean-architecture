@@ -1,9 +1,9 @@
 package controller
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/common/presenter"
 	"github.com/CSalih/go-clean-architecture/internal/common/router"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/usecase"
-	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 	"net/http"
 )
 

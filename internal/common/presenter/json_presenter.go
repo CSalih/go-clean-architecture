@@ -1,9 +1,7 @@
 package presenter
 
 import (
-	"encoding/json"
-	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
-	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
+	"github.com/CSalih/go-clean-architecture/internal/common/router"
 	"net/http"
 )
 
