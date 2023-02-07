@@ -12,7 +12,7 @@ type getAllUsersHandler struct {
 }
 
 func (h getAllUsersHandler) Handle(ctx *router.Context) error {
-	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusOK)
+	jsonPresenter := presenter.NewJsonResponsePresenter(ctx.Writer, http.StatusOK)
 	query := usecase.GetAllUsersQuery{}
 	return h.getAllUsersUseCase.Handle(query, jsonPresenter)
 }

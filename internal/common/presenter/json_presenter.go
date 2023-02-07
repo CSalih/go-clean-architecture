@@ -1,23 +1,24 @@
 package presenter
 
 import (
-	"github.com/CSalih/go-clean-architecture/internal/common/router"
+	"encoding/json"
+	"github.com/CSalih/go-clean-architecture/internal/common/problem"
 	"net/http"
 )
 
-type jsonHttpPresenter struct {
+type jsonResponsePresenter struct {
 	Writer            http.ResponseWriter
 	SuccessStatusCode int
 }
 
-func NewJsonHttpPresenter(writer http.ResponseWriter, successStatusCode int) presenter.Presenter {
-	return &jsonHttpPresenter{
+func NewJsonResponsePresenter(writer http.ResponseWriter, successStatusCode int) Presenter {
+	return &jsonResponsePresenter{
 		Writer:            writer,
 		SuccessStatusCode: successStatusCode,
 	}
 }
 
-func (p *jsonHttpPresenter) OnSuccess(data interface{}) error {
+func (p *jsonResponsePresenter) OnSuccess(data interface{}) error {
 	jsonString, err := json.Marshal(data)
 	if err != nil {
 		return p.OnError(err)
@@ -33,7 +34,7 @@ func (p *jsonHttpPresenter) OnSuccess(data interface{}) error {
 	return nil
 }
 
-func (p *jsonHttpPresenter) OnError(err error) error {
+func (p *jsonResponsePresenter) OnError(err error) error {
 	data := ProblemFromError(err)
 	jsonString, err := json.Marshal(data)
 	if err != nil {

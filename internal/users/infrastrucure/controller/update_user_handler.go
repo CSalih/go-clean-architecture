@@ -27,7 +27,7 @@ func (h updateUserHandler) Handle(ctx *router.Context) error {
 		}
 	}
 
-	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusOK)
+	jsonPresenter := presenter.NewJsonResponsePresenter(ctx.Writer, http.StatusOK)
 	command := usecase.UpdateUserCommand{
 		Username: ctx.Params["name"],
 		Status:   jsonBody.Status,

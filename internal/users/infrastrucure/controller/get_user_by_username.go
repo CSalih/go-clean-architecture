@@ -12,7 +12,7 @@ type getUserByUsernameHandler struct {
 }
 
 func (h getUserByUsernameHandler) Handle(ctx *router.Context) error {
-	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusOK)
+	jsonPresenter := presenter.NewJsonResponsePresenter(ctx.Writer, http.StatusOK)
 	query := usecase.GetUserByUsernameQuery{
 		Username: ctx.Params["name"],
 	}

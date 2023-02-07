@@ -12,7 +12,7 @@ type addUserHandler struct {
 }
 
 func (h addUserHandler) Handle(ctx *router.Context) error {
-	jsonPresenter := presenter.NewJsonHttpPresenter(ctx.Writer, http.StatusCreated)
+	jsonPresenter := presenter.NewJsonResponsePresenter(ctx.Writer, http.StatusCreated)
 	command := usecase.AddUserCommand{
 		Username: ctx.Params["name"],
 		Status:   "new",
