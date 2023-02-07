@@ -6,12 +6,16 @@ import (
 	"net/http"
 )
 
+// Context holds variables between handlers, middlewares. It has some handy
+// helper functions to make work with JSON easy.
 type Context struct {
 	Writer  http.ResponseWriter
 	Request *http.Request
 	Params  map[string]string
 }
 
+// Json marshals the data to JSON and writes it with
+// Content-Type "application/json" into the response body.
 func (c *Context) Json(code int, data interface{}) error {
 	jsonString, err := json.Marshal(data)
 	if err != nil {
@@ -27,6 +31,8 @@ func (c *Context) Json(code int, data interface{}) error {
 	return nil
 }
 
+// ProblemJson marshals the data to JSON and writes it with
+// Content-Type "application/problem+json" into the response body.
 func (c *Context) ProblemJson(err error) error {
 	data := newFromError(err)
 	jsonString, err := json.Marshal(data)

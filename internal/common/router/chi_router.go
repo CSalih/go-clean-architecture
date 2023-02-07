@@ -9,6 +9,7 @@ type chiRouter struct {
 	router *chi.Mux
 }
 
+// NewChiRouter creates a new router based on chi.
 func NewChiRouter() Router {
 	return &chiRouter{
 		router: chi.NewRouter(),

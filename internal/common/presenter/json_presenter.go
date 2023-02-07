@@ -10,6 +10,7 @@ type jsonResponsePresenter struct {
 	SuccessStatusCode int
 }
 
+// NewJsonResponsePresenter transforms the data to json and writes it to the response writer
 func NewJsonResponsePresenter(writer http.ResponseWriter, successStatusCode int) Presenter {
 	return &jsonResponsePresenter{
 		Writer:            writer,

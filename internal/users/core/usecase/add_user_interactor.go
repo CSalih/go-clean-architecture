@@ -10,6 +10,7 @@ type addUserInteractor struct {
 	doesUsernameExistsGateway DoesUsernameExistsGateway
 }
 
+// NewAddUserInteractor creates a new instance witch implements AddUserUseCase
 func NewAddUserInteractor(addNewUserGateway AddNewUserGateway, doesUsernameExistsGateway DoesUsernameExistsGateway) AddUserUseCase {
 	return &addUserInteractor{
 		addNewUserGateway:         addNewUserGateway,

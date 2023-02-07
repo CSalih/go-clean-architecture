@@ -10,6 +10,7 @@ type userRepository struct {
 	data map[string]model.User
 }
 
+// NewInMemoryUserRepository creates a new in memory user repository instance
 func NewInMemoryUserRepository() UserRepository {
 	return &userRepository{
 		data: make(map[string]model.User),

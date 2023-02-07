@@ -12,11 +12,13 @@ type userController struct {
 	updateUserHandler        updateUserHandler
 }
 
+// UserController handles the routes of the user resource.
 type UserController interface {
-	// AddRoutes adds the routes of the controller to the given router
+	// AddRoutes adds the routes of the controller to the given router.
 	AddRoutes(r router.Router)
 }
 
+// NewUserController creates a new user controller.
 func NewUserController(
 	addUserUseCase usecase.AddUserUseCase,
 	getAllUsersUseCase usecase.GetAllUsersUseCase,

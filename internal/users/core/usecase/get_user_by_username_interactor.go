@@ -8,6 +8,7 @@ type getUserByUsernameInteractor struct {
 	gateway GetUserByUsernameGateway
 }
 
+// NewGetUserByUsernameInteractor creates a new instance witch implements GetUserByUsernameUseCase
 func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByUsernameUseCase {
 	return &getUserByUsernameInteractor{
 		gateway: gateway,

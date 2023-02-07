@@ -10,6 +10,7 @@ type ginRouter struct {
 	router *gin.Engine
 }
 
+// NewGinRouter creates a new router based on gin.
 func NewGinRouter() Router {
 	return &ginRouter{
 		router: gin.Default(),
