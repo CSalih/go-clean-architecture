@@ -1,8 +1,8 @@
 package usecase
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
-	"github.com/CSalih/go-clean-architecture/internal/users/infrastrucure/presenter"
 )
 
 type addUserInteractor struct {

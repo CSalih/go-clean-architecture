@@ -2,6 +2,7 @@ package presenter
 
 import (
 	"encoding/json"
+	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
 	"net/http"
 )
@@ -11,7 +12,7 @@ type jsonHttpPresenter struct {
 	SuccessStatusCode int
 }
 
-func NewJsonHttpPresenter(writer http.ResponseWriter, successStatusCode int) Presenter {
+func NewJsonHttpPresenter(writer http.ResponseWriter, successStatusCode int) presenter.Presenter {
 	return &jsonHttpPresenter{
 		Writer:            writer,
 		SuccessStatusCode: successStatusCode,
