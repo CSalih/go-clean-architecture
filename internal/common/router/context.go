@@ -2,7 +2,7 @@ package router
 
 import (
 	"encoding/json"
-	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
+	"github.com/CSalih/go-clean-architecture/internal/common/problem"
 	"net/http"
 )
 
@@ -28,7 +28,7 @@ func (c *Context) Json(code int, data interface{}) error {
 }
 
 func (c *Context) ProblemJson(err error) error {
-	data := ProblemFromError(err)
+	data := NewFromError(err)
 	jsonString, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -43,7 +43,7 @@ func (c *Context) ProblemJson(err error) error {
 	return nil
 }
 
-func ProblemFromError(err error) problem.Problem {
+func NewFromError(err error) problem.Problem {
 	switch prob := err.(type) {
 	case problem.Details:
 		return prob.GetProblem()
