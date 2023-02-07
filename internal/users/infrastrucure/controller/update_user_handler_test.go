@@ -25,12 +25,13 @@ func (suite *ControllerIntegrationTestSuite) TestUpdateUserHandler_Handle() {
 		updateUserUseCase: updateUserUseCase,
 	}
 
-	handler.Handle(&router.Context{
+	err := handler.Handle(&router.Context{
 		Request: req,
 		Writer:  w,
 		Params:  map[string]string{"name": "salih"},
 	})
 
+	suite.NoError(err)
 	suite.Equal(200, w.Code)
 	suite.Contains(w.Body.String(), "salih")
 	suite.Contains(w.Body.String(), expectedStatus)

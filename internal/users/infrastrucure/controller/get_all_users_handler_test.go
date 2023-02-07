@@ -16,12 +16,13 @@ func (suite *ControllerIntegrationTestSuite) TestGetAllUsersHandler_Handle() {
 		getAllUsersUseCase: getAllUsersUseCase,
 	}
 
-	handler.Handle(&router.Context{
+	err := handler.Handle(&router.Context{
 		Request: req,
 		Writer:  w,
 		Params:  map[string]string{},
 	})
 
+	suite.NoError(err)
 	suite.Equal(200, w.Code)
 	suite.Equal("[]", w.Body.String())
 }
