@@ -40,10 +40,10 @@ func NewUserController(
 }
 
 func (c *userController) AddRoutes(r router.Router) {
-	r.Get("/api/v1/users", c.getAllUsersHandler.Handle)
+	r.Get("/api/v1/users", withProblemJsonHandler(c.getAllUsersHandler.Handle))
 	r.Post("/api/v1/users/{name}", withProblemJsonHandler(c.addUserHandler.Handle))
-	r.Put("/api/v1/users/{name}", c.updateUserHandler.Handle)
-	r.Get("/api/v1/users/{name}", c.getUserByUsernameHandler.Handle)
+	r.Put("/api/v1/users/{name}", withProblemJsonHandler(c.updateUserHandler.Handle))
+	r.Get("/api/v1/users/{name}", withProblemJsonHandler(c.getUserByUsernameHandler.Handle))
 }
 
 func withProblemJsonHandler(handler func(ctx *router.Context) error) router.HandlerFunc {

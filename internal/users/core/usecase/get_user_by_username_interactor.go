@@ -1,6 +1,8 @@
 package usecase
 
-import "github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
+)
 
 type getUserByUsernameInteractor struct {
 	gateway GetUserByUsernameGateway
@@ -12,11 +14,10 @@ func NewGetUserByUsernameInteractor(gateway GetUserByUsernameGateway) GetUserByU
 	}
 }
 
-func (i getUserByUsernameInteractor) Handle(query GetUserByUsernameQuery) (model.User, error) {
+func (i getUserByUsernameInteractor) Handle(query GetUserByUsernameQuery, presenter presenter.Presenter) error {
 	user, err := i.gateway.GetByUsername(query)
 	if err != nil {
-		// TODO: We need to pass a presenter
-		return model.User{}, err
+		return presenter.OnError(err)
 	}
-	return user, nil
+	return presenter.OnSuccess(user)
 }

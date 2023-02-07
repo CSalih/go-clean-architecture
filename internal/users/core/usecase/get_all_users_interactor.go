@@ -1,6 +1,8 @@
 package usecase
 
-import "github.com/CSalih/go-clean-architecture/internal/users/domain/model"
+import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
+)
 
 type getAllUsersInteractor struct {
 	gateway GetAllUsersGateway
@@ -12,11 +14,10 @@ func NewGetAllUsersInteractor(gateway GetAllUsersGateway) GetAllUsersUseCase {
 	}
 }
 
-func (r getAllUsersInteractor) Handle(query GetAllUsersQuery) ([]model.User, error) {
+func (r getAllUsersInteractor) Handle(query GetAllUsersQuery, presenter presenter.Presenter) error {
 	users, err := r.gateway.GetAll(query)
 	if err != nil {
-		// TODO: We need to pass a presenter
-		return []model.User{}, err
+		return presenter.OnError(err)
 	}
-	return users, nil
+	return presenter.OnSuccess(users)
 }

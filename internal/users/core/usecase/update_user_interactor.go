@@ -1,8 +1,8 @@
 package usecase
 
 import (
+	"github.com/CSalih/go-clean-architecture/internal/users/core/presenter"
 	"github.com/CSalih/go-clean-architecture/internal/users/core/problem"
-	"github.com/CSalih/go-clean-architecture/internal/users/domain/model"
 )
 
 type updateUserInteractor struct {
@@ -17,22 +17,21 @@ func NewUpdateUserInteractor(updateUserGateway UpdateUserGateway, doesUsernameEx
 	}
 }
 
-func (r updateUserInteractor) Handle(command UpdateUserCommand) (model.User, error) {
+func (r updateUserInteractor) Handle(command UpdateUserCommand, presenter presenter.Presenter) error {
 	if command.Username == "" {
-		return model.User{}, problem.NewUsernameRequiredProblem()
+		return presenter.OnError(problem.NewUsernameRequiredProblem())
 	}
 	if command.Status == "" {
-		return model.User{}, problem.NewUserStatusRequiredProblem()
+		return presenter.OnError(problem.NewUserStatusRequiredProblem())
 	}
 
 	if exist, _ := r.doesUsernameExistsGateway.Exist(UsernameExistsQuery{command.Username}); !exist {
-		return model.User{}, problem.NewUserNotFoundProblem()
+		return presenter.OnError(problem.NewUserNotFoundProblem())
 	}
 
 	user, err := r.updateUserGateway.Update(command)
 	if err != nil {
-		// TODO: We need to pass a presenter
-		return model.User{}, err
+		return presenter.OnError(err)
 	}
-	return user, nil
+	return presenter.OnSuccess(user)
 }
