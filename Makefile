@@ -8,8 +8,8 @@ clean:
 	rm -rf build
 
 build:
-	go build -o build/http-server cmd/http-server/main.go
-	go build -o build/http-cli cmd/cli/main.go
+	go build -o build/gca-server cmd/http-server/main.go
+	go build -o build/gca-cli cmd/cli/main.go
 
 test:
 	go test ./... -v
