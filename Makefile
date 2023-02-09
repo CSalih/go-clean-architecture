@@ -1,4 +1,4 @@
-.PHONY: all build test coverage run clean
+.PHONY: all build-server build-cli build test coverage run clean
 
 default: all
 all: clean test build
@@ -7,9 +7,13 @@ clean:
 	go clean
 	rm -rf build
 
-build:
+build-server:
 	go build -o build/gca-server cmd/http-server/main.go
+
+build-cli:
 	go build -o build/gca-cli cmd/cli/main.go
+
+build: build-server build-cli
 
 test:
 	go test ./... -v
