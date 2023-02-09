@@ -9,6 +9,8 @@ apply [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-
 
 ## Getting Started
 
+### Server
+
 ```bash
 # start the server
 make run
@@ -18,9 +20,20 @@ curl --location --request GET 'http://localhost:8080/api/v1/users/hello-world'
 curl --location --request GET 'http://localhost:8080/api/v1/users'
 ```
 
+### CLI
+
+```
+# build an use cli
+make build-cli
+./build/gca-cli user add --username hello-world
+./build/gca-cli user update --username hello-world --status active
+./build/gca-cli user get --username hello-world
+```
+
 ## Architecture
 
-The dependency goes towards the center - [The Dependency Rule](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html#the-dependency-rule). 
+The dependency goes towards the
+center - [The Dependency Rule](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html#the-dependency-rule).
 
 ![Architecture Overview](docs/assets/clean-architecture.png)
 
